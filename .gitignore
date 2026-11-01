@@ -1,0 +1,7 @@
+# model files, caches, raw frames and intermediate renders are not committed
+models/
+build/
+__pycache__/
+*.pyc
+*.onnx
+*.bin
