@@ -13,7 +13,7 @@ while True:
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", os.path.join(B, "video_noaudio.mp4"), "-i", os.path.join(B, "mix.wav"),
                     "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-tune", "animation",
                     "-crf", str(crf), "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", "30", "-g", "300",
-                    "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", out], check=True)
+                    "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-shortest", "-movflags", "+faststart", out], check=True)
     size = os.path.getsize(out)
     print(f"CRF {crf}: {size / 1e6:.1f} MB", flush=True)
     if size < LIMIT:

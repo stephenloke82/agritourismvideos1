@@ -1,19 +1,19 @@
 # Checks report: video-045
 
 ## ffprobe
-- duration: 643.80 s (10 min 43.8 s)
-- file size: 80.61 MB (80614047 bytes)
+- duration: 643.77 s (10 min 43.8 s)
+- file size: 77.97 MB (77969019 bytes)
 - video: h264 High 1920x1080 yuv420p 30/1 fps, 798 kb/s
-- audio: aac LC 48000 Hz 2 ch, 195 kb/s
+- audio: aac LC 44100 Hz 2 ch, 162 kb/s
 - faststart (moov before mdat): True
 
 ## Loudness and silence (measured with ffmpeg, not heard)
 - integrated loudness: -14.0 LUFS (target -14)
-- true peak: -1.4 dBTP (target under -1)
+- true peak: -2.4 dBTP (target under -1)
 - loudness range: 1.4 LU
-- sample peak (per channel / overall): -1.575012, -1.589042, -1.575012 dBFS
-- silences over 1.5 s in the final mix (below -50 dB): 0 
-- gaps over 1.5 s in the narration track (music still plays under them): 1
+- sample peak (per channel / overall): -2.707336, -2.707336, -2.707336 dBFS
+- silences over 1.5 s in the final mix (below -50 dB): 1 ['630.249']
+- gaps over 1.5 s in the narration track: 1
   - 630.24s to 643.8s (13.56s) in C07: end screen (20 s, marked in BUILD.md)
 
 ## Spoken script vs what was sent to the voice

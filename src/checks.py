@@ -71,7 +71,7 @@ def loudness():
     starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", r.stderr)]
     ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", r.stderr)]
     scenes = timeline.build()
-    say(f"- gaps over 1.5 s in the narration track (music still plays under them): {len(starts)}")
+    say(f"- gaps over 1.5 s in the narration track: {len(starts)}")
     for a, b in zip(starts, ends + [None] * (len(starts) - len(ends))):
         S = next((S for S in scenes if S.start <= a < S.start + S.dur), scenes[-1])
         nxt = next((T for T in scenes if T.start > a), None)

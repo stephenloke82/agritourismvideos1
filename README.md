@@ -1,7 +1,7 @@
 # Video 045: 30 Farm Event Ideas by Season, With Real Ticket Prices
 
 A fully AI-generated cartoon explainer for the Agritourism Success channel. Every frame is drawn in code
-(Python + pycairo), every sound is synthesised in code, and the narration is the saved voice
+(Python + pycairo), and the only sound is the narration in the saved voice
 **Midwest Female Warm** (Kokoro-82M ONNX, `af_heart` 0.6 + `af_sarah` 0.4, speed 0.97).
 
 ## What's here
@@ -31,7 +31,7 @@ curl -L -o models/kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/r
 curl -L -o models/voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
 python3 src/fonts.py            # Fredoka + Nunito (OFL) static cuts into ~/.fonts
 python3 src/voice.py            # narration, one mastered file per beat -> build/audio/
-python3 src/audio.py            # music, sound effects, ducking, -14 LUFS mix -> build/mix.wav
+python3 src/audio.py            # narration-only mix at -14 LUFS -> build/mix.wav (add --with-music for music + effects)
 python3 src/render.py video --crf 16   # frames -> high-quality intermediate build/video_noaudio.mp4 (4 workers)
 python3 src/mux.py              # final encode into output/, raising CRF until under 92 MB
 python3 src/captions.py         # output/video-045.srt
@@ -52,7 +52,8 @@ python3 src/checks.py           # output/checks-report.md
 - `gfx.py`, `chars.py`, `props.py`, `sets.py`, `icons.py` are the drawing kit: Dot (drawn from her portrait),
   villagers, animals, the gate, price tags, the tracker and season wheel, the four season sets with parallax and weather.
 - `vignettes.py` holds the 30 event scenes; `scenes_main.py` holds everything else.
-- `audio.py` writes the music (Karplus-Strong plucked strings and pads, one variation per season), the sound effects
-  and the mix. Music sits about 16 dB under the voice while she speaks.
+- `audio.py` builds the soundtrack. The published video is narration only (music and effects removed at Stephen's
+  request). `--with-music` brings back the synthesised folk music (one variation per season, ducked about 16 dB under
+  the voice) and the small sound effects.
 
 Model files, fonts, frames and intermediate audio live in `build/` and `models/` and are not committed.

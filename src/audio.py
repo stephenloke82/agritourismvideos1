@@ -2,7 +2,8 @@
 
 Music: Karplus-Strong plucked strings (guitar-like arpeggios + bass) over soft pads,
 one variation per season. Ducked ~16 dB under the voice. Final mix -14 LUFS, TP < -1 dB.
-Usage: python3 src/audio.py  -> build/mix.wav, build/voice_track.wav
+Usage: python3 src/audio.py               -> narration only (current choice) -> build/mix.wav
+       python3 src/audio.py --with-music  -> narration + music + effects
 """
 import os, sys, math, json, subprocess
 import numpy as np
@@ -277,6 +278,9 @@ def sfx(name):
 SFX_GAIN_DB = -20.0
 
 
+VOICE_ONLY = "--with-music" not in sys.argv
+
+
 def build_mix():
     scenes = timeline.build()
     total = timeline.total_duration(scenes)
@@ -351,6 +355,9 @@ def build_mix():
     # account for the -9 dB duck that applies during speech
     base = 10 ** ((target - m_l + 9.0) / 20)
     music *= base * gain[:, None]
+    if VOICE_ONLY:  # Stephen's choice (1 Nov 2026): narration only, no music or effects
+        music[:] = 0
+        fx[:] = 0
     mix = music.copy()
     mix[:, 0] += voice + fx
     mix[:, 1] += voice + fx
@@ -359,16 +366,17 @@ def build_mix():
     sf.write(os.path.join(BUILD, "voice_track.wav"), voice[: int(total * SR)].astype(np.float32), SR, subtype="FLOAT")
     json.dump(log, open(os.path.join(BUILD, "sfx_log.json"), "w"))
     # report measured music-under-voice level
-    mus_speech = meter.integrated_loudness(music.mean(1)[: len(sp_idx)][sp_idx])
-    print(f"voice {v_l:.1f} LUFS, music under speech {mus_speech:.1f} LUFS (diff {v_l - mus_speech:.1f} dB)")
+    mus_speech = meter.integrated_loudness(music.mean(1)[: len(sp_idx)][sp_idx]) if not VOICE_ONLY else None
+    if not VOICE_ONLY:
+        print(f"voice {v_l:.1f} LUFS, music under speech {mus_speech:.1f} LUFS (diff {v_l - mus_speech:.1f} dB)")
     # final loudness: two-pass loudnorm to -14 LUFS, TP -1.5 (headroom for AAC)
     src = os.path.join(BUILD, "premix.wav")
-    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", src, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", src, "-af", "loudnorm=I=-14:TP=-2.5:LRA=11:print_format=json",
                         "-f", "null", "-"], capture_output=True, text=True)
     js = json.loads(r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1])
-    af = ("loudnorm=I=-14:TP=-1.5:LRA=11:linear=true:measured_I={input_i}:measured_TP={input_tp}:"
+    af = ("loudnorm=I=-14:TP=-2.5:LRA=11:linear=true:measured_I={input_i}:measured_TP={input_tp}:"
           "measured_LRA={input_lra}:measured_thresh={input_thresh}:offset={target_offset}").format(**js)
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", src, "-af", af + ",alimiter=limit=0.84:level=false",
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", src, "-af", af + ",alimiter=limit=0.72:level=false",
                     "-ar", str(SR), "-c:a", "pcm_s16le", os.path.join(BUILD, "mix.wav")], check=True)
     print("mix written", total)
 
