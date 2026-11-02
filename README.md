@@ -4,7 +4,7 @@ Fully AI-generated cartoon explainers for the Agritourism Success YouTube channe
 (Python + pycairo) and narrated with Stephen's saved Kokoro voices. One repo, one folder per video, one shared kit.
 
 ```
-kit/      shared drawing kit: gfx, characters (Dot, Sarah, villagers, animals), props, season sets, icons, fonts
+kit/      shared drawing kit: gfx, characters (Dot, Sarah, villagers, animals), props, flowers, season sets, icons, fonts
 voices/   Stephen's saved voices: a VOICE.md recipe and a reference sample for each
 videos/   one folder per video: script/, src/ (that video's scenes and pipeline), output/ (final MP4, captions,
           thumbnails, contact sheet, checks report)
@@ -15,6 +15,7 @@ models/   Kokoro model files, shared by every video (not committed; see below)
 | --- | --- | --- | --- |
 | [video-045](videos/video-045): 30 Farm Event Ideas by Season, With Real Ticket Prices | Dot | Midwest Female Warm | 10:44 |
 | [video-008](videos/video-008): Nobody Can Find My Farm Online | Sarah | Young American Female Smooth | 7:55 |
+| [video-088](videos/video-088): How to Start a Flower Arranging Workshop on Your Farm | Sarah | Young American Female Smooth | 8:13 |
 
 ## Set up once
 
