@@ -14,7 +14,7 @@ models/   Kokoro model files, shared by every video (not committed; see below)
 | Video | Host | Voice | Length |
 | --- | --- | --- | --- |
 | [video-045](videos/video-045): 30 Farm Event Ideas by Season, With Real Ticket Prices | Dot | Midwest Female Warm | 10:44 |
-| [video-008](videos/video-008): Nobody Can Find My Farm Online | Sarah | Young American Female Smooth | 8:16 |
+| [video-008](videos/video-008): Nobody Can Find My Farm Online | Sarah | Young American Female Smooth | 7:55 |
 
 ## Set up once
 
