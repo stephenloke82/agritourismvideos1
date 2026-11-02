@@ -3,6 +3,7 @@ Usage: python3 src/contact.py [out.jpg] [frac]   (frac = point in each scene, de
 import os, sys
 from multiprocessing import Pool
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 import timeline
 from render import still, BUILD
 from beats import ROOT

@@ -8,6 +8,7 @@
 """
 import os, sys, re, json, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 from beats import load_beats, ROOT
 import timeline
 

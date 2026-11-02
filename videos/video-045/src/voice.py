@@ -1,4 +1,4 @@
-"""Render narration, one file per beat, following voice/VOICE.md.
+"""Render narration, one file per beat, following voices/midwest-female-warm/VOICE.md.
 
 Engine: Kokoro-82M ONNX, voice blend af_heart 0.6 + af_sarah 0.4, speed 0.97,
 American English via the full misaki G2P engine (spaCy POS tagging).
@@ -15,10 +15,12 @@ import soundfile as sf
 import onnxruntime as ort
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 from beats import load_beats, ROOT
 
-MODEL = os.path.join(ROOT, "models", "kokoro-v1.0.onnx")
-VOICES = os.path.join(ROOT, "models", "voices-v1.0.bin")
+REPO = os.path.dirname(os.path.dirname(ROOT))  # models/ is shared at the repo root
+MODEL = os.environ.get("KOKORO_MODEL", os.path.join(REPO, "models", "kokoro-v1.0.onnx"))
+VOICES = os.environ.get("KOKORO_VOICES", os.path.join(REPO, "models", "voices-v1.0.bin"))
 OUT = os.path.join(ROOT, "build", "audio")
 SR = 24000
 SPEED = 0.97

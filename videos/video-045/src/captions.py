@@ -1,6 +1,7 @@
 """Build output/video-045.srt from the real phrase timings. Words are the spoken script exactly."""
 import os, sys, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 import timeline
 from beats import ROOT
 

@@ -9,6 +9,7 @@ import os, sys, math, json, subprocess
 import numpy as np
 import soundfile as sf
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 import timeline
 import common
 import vignettes, scenes_main  # noqa: registers scene sfx

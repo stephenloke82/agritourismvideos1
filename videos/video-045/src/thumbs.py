@@ -2,6 +2,7 @@
 import os, sys, math
 import cairo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 from gfx import *
 from props import gate, latch_point, price_tag, chapter_wheel, barn, fence, season_wheel
 from chars import person, sheep

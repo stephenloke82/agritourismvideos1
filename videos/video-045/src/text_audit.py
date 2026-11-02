@@ -2,6 +2,7 @@
 Reports the smallest text per scene so the 54 px body / 120 px price rules can be checked."""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 import gfx
 REC = []
 _orig = gfx.text

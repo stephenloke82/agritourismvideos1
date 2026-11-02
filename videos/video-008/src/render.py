@@ -5,11 +5,12 @@
 import os, sys, subprocess, time, math
 import cairo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 from gfx import W, H, FPS, paper_texture, vignette_overlay
 import timeline
 from beats import ROOT
 import common
-import vignettes, scenes_main  # noqa: register scenes
+import scenes008  # noqa: register scenes
 
 BUILD = os.path.join(ROOT, "build")
 GRAIN = float(os.environ.get("GRAIN", "0.5"))

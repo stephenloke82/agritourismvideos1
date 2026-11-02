@@ -1,11 +1,12 @@
 """Final encode: build/video_noaudio.mp4 (high-quality intermediate) + build/mix.wav ->
-output/video-045-30-farm-event-ideas.mp4. H.264 High, yuv420p, 30 fps, AAC 192 kb/s, faststart.
+output/video-008-nobody-can-find-my-farm-online.mp4. H.264 High, yuv420p, 30 fps, AAC 192 kb/s, faststart.
 Starts at CRF 27 and raises CRF (never lowers resolution) until the file is under 92 MB."""
 import os, sys, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "kit"))  # shared kit
 from beats import ROOT
 B = os.path.join(ROOT, "build")
-out = os.path.join(ROOT, "output", "video-045-30-farm-event-ideas.mp4")
+out = os.path.join(ROOT, "output", "video-008-nobody-can-find-my-farm-online.mp4")
 os.makedirs(os.path.dirname(out), exist_ok=True)
 LIMIT = 92e6
 crf = int(sys.argv[1]) if len(sys.argv) > 1 else 27

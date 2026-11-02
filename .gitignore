@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 *.onnx
 *.bin
+**/build/
